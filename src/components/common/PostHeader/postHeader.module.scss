@@ -1,0 +1,52 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.left {
+  &__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    & a {
+      text-decoration: none;
+      margin: 0;
+      font-family: "Inter UI";
+      font-size: 20px;
+      line-height: 28px;
+      text-align: left;
+      color: #1890FF;
+      margin-right: 13px;
+    }
+  }
+  &__titleText {
+
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  &__name {
+    & p {
+      font-family: "Inter UI";
+      font-size: 18px;
+      line-height: 22px;
+      text-align: left;
+      margin: 0;
+      color: #000000D9;
+
+      &:last-child {
+        font-size: 12px;
+        line-height: 18px;
+        text-align: left;
+        color: #00000080;
+      }
+    }
+  }
+  &__avatar {
+    height: 46px;
+    width: auto;
+    margin-left: 12px;
+  }
+}

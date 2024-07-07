@@ -1,0 +1,35 @@
+.login {
+  &__title {
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+    color: #262626;
+    margin: 0 0 21px 0;
+  }
+  &__link {
+    font-family: "Roboto";
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    color: #8C8C8C;
+    margin: 0;
+  }
+
+  &__line {
+    margin-top: 9px;
+    margin-bottom: 8px;
+    height: 1px;
+    background-color: #E8E8E8;
+  }
+}
+
+.signUp {
+  color: #1890FF;
+  text-decoration: none;
+  &:visited {
+    color: #1890FF;
+  }
+}

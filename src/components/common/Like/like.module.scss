@@ -1,0 +1,18 @@
+.like {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  & svg {
+    margin-right: 4px;
+    height: 16px;
+    width: 14px;
+  }
+  & span {
+    font-family: "Inter UI";
+    font-size: 12px;
+    line-height: 22px;
+    text-align: left;
+
+  }
+}

@@ -21,6 +21,11 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "./.eslintrc.js",
+    "typings"
+  ],
+  "files": [
+    "declarations.d.ts"
   ]
 }

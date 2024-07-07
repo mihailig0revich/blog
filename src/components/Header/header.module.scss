@@ -1,0 +1,59 @@
+.header {
+  box-sizing: border-box;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 22px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  & a {
+    color: black;
+    text-decoration: none;
+    font-family: Inter UI;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: left;
+
+  }
+  &__title {
+    text-decoration: none;
+    margin: 0;
+    font-family: "Inter UI";
+    font-size: 18px;
+    line-height: 28px;
+    text-align: left;
+
+    &:visited{
+      color: black;
+    }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    button {
+      margin-left: 18px;
+    }
+  }
+  &__user {
+    display: flex;
+    align-items: center;
+    margin-left: 26px;
+    & p {
+      margin: 0;
+      font-family: "Inter UI";
+      font-size: 18px;
+      line-height: 28px;
+      text-align: left;
+    }
+    & img {
+      height: 46px;
+      width: 46px;
+      margin-left: 13px;
+    }
+  }
+}

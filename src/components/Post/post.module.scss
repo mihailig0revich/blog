@@ -1,0 +1,26 @@
+.post {
+
+  &__descr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    margin-top: 16px;
+  }
+
+  &__buttons {
+    display: flex;
+    & button:last-child {
+      margin-left: 12px;
+    }
+  }
+
+  &__text {
+    font-family: "Inter UI";
+    font-size: 12px;
+    line-height: 22px;
+    text-align: left;
+    max-width: 680px;
+    margin: 0;
+  }
+}

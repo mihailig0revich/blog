@@ -1,0 +1,16 @@
+
+.button {
+  font-family: 'Inter UI';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid black;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
