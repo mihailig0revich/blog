@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 
 import AuthContext from '../../context/context';
@@ -13,7 +12,6 @@ function HeaderContainer() {
     history.replace('/sign-in');
   };
   const logOutHandler = () => {
-    localStorage.clear();
     auth.clearAuth();
   };
   const toRegister = () => {

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Markdown from 'react-markdown';
 
 import PostHeader from '../common/PostHeader/PostHeader';

@@ -1,34 +1,25 @@
-import { useForm } from 'react-hook-form';
+import { FieldErrors, FieldValues, useForm, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { FormEvent } from 'react';
 
 import AuthCard from '../common/AuthCard/AuthCard';
 import CustomInput from '../common/CustomInput/CustomInput';
 import Button from '../common/Button/Button';
-import { UserLoginType } from '../../types/types';
 
 import style from './login.module.scss';
 
 interface ILogin {
-  handleLogin: (i: UserLoginType) => void;
   validateError: string;
+  register: UseFormRegister<FieldValues>;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  errors: FieldErrors<FieldValues>;
 }
 
-function Login({ handleLogin, validateError }: ILogin) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    shouldUseNativeValidation: false,
-    mode: 'onBlur',
-  });
-  const onSubmit = async (data: any) => {
-    handleLogin(data);
-  };
+function Login({ validateError, onSubmit, register, errors }: ILogin) {
   return (
     <AuthCard>
       <p className={style.login__title}>Sign In</p>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate onSubmit={onSubmit}>
         <CustomInput
           rule={{
             required: 'required field',

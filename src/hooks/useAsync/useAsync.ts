@@ -12,7 +12,7 @@ export default function useAsync<T>(options: any = {}): RespType<T> {
   const [error, setError] = useState<any>();
   const [value, setValue] = useState<T>();
 
-  const callback = async (params: { body?: string; url: string }) => {
+  const callback = async (params: { body?: string; url: string; header?: any }) => {
     setLoading(true);
     setError(undefined);
     setValue(undefined);
@@ -23,6 +23,9 @@ export default function useAsync<T>(options: any = {}): RespType<T> {
     const fetchOptions = params.body
       ? { ...DEFAULT_OPTIONS, ...options, body: params.body }
       : { ...DEFAULT_OPTIONS, ...options };
+    if (params.header) {
+      fetchOptions.headers = params.header;
+    }
 
     await fetch(fetchUrl, fetchOptions)
       .then((res) => {

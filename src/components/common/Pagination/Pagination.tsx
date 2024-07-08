@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router-dom';
 
 import style from './pagination.module.scss';
 
@@ -10,7 +10,7 @@ interface IPagination {
 
 function Pagination({ maxPage }: IPagination) {
   const history = useHistory();
-  const { activePage = 1 } = useParams<{ activePage: string }>();
+  const { activePage = 1 } = useParams();
   const activeNum = +activePage;
   const pageElements: React.ReactElement[] = [];
   let firstPage = 1;

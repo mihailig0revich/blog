@@ -1,6 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory, useParams } from 'react-router';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 
 import { PostType } from '../../types/types';
 import Loader from '../common/Loader/Loader';
@@ -13,7 +12,7 @@ import Post from './Post';
 function PostContainer() {
   const [defVal, setdefVal] = useState<PostType | undefined>();
   const [update, setUpdate] = useState<boolean>(false);
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams();
   const auth = useContext(AuthContext);
   const history = useHistory();
 
@@ -59,7 +58,7 @@ function PostContainer() {
     }
   }, [value]);
 
-  if (error || errorDelete?.message) return <ErrorComponent err={error?.message || errorDelete?.message} />;
+  if (error || errorDelete?.message) return <ErrorComponent err={`${error?.message || errorDelete?.message}`} />;
   if ((loading && !update) || defVal === undefined) return <Loader />;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

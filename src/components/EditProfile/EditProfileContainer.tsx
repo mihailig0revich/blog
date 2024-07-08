@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import useAsync from '../../hooks/useAsync/useAsync';
@@ -41,7 +40,7 @@ function EditProfileContainer() {
 
   console.log(valueGetPost);
 
-  if (error || errorGetPost) <ErrorComponent err={error?.message || errorGetPost?.message} />;
+  if (error || errorGetPost) <ErrorComponent err={`${error?.message || errorGetPost?.message}`} />;
   if (loadingGetPost) return <Loader />;
   if (value) {
     history.push('');

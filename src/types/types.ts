@@ -40,7 +40,7 @@ export interface User {
 export interface AuthContextType {
   auth: User;
   clearAuth: () => void;
-  setContextAuth: () => void;
+  setContextAuth: (i: string) => void;
 }
 
 export interface CurrentUser {
@@ -49,7 +49,7 @@ export interface CurrentUser {
 
 export interface RespType<T> {
   value: T | undefined;
-  error: { message: string; status?: number } | undefined;
+  error: { [index: string]: string | number } | undefined;
   loading: boolean | undefined;
   callback: (...i: any[]) => void;
 }

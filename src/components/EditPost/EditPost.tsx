@@ -1,16 +1,16 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import ChangePost from '../components/common/ChangePost/ChangePost';
-import useAsync from '../hooks/useAsync/useAsync';
-import { CreatePostType, PostType } from '../types/types';
-import ErrorComponent from '../components/common/ErrorComponent/ErrorComponent';
-import Loader from '../components/common/Loader/Loader';
+import ChangePost from '../common/ChangePost/ChangePost';
+import useAsync from '../../hooks/useAsync/useAsync';
+import { CreatePostType, PostType } from '../../types/types';
+import ErrorComponent from '../common/ErrorComponent/ErrorComponent';
+import Loader from '../common/Loader/Loader';
 
 function EditPost() {
   const history = useHistory();
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams();
   const { error, loading, value, callback } = useAsync<{ article: PostType; articlesCount: number }>({
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function EditPost() {
     callbackGetPost({ url: `/articles/${slug}` });
   }, []);
 
-  if (error || errorGetPost) <ErrorComponent err={error?.message || errorGetPost?.message} />;
+  if (error || errorGetPost) <ErrorComponent err={`${error?.message || errorGetPost?.message}`} />;
   if (loadingGetPost) return <Loader />;
   if (value) history.push('');
 

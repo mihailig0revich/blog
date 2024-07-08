@@ -1,38 +1,25 @@
-import { useForm } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { FormEvent } from 'react';
 
 import AuthCard from '../common/AuthCard/AuthCard';
 import CustomInput from '../common/CustomInput/CustomInput';
 import Button from '../common/Button/Button';
 import CustomCheckBox from '../common/CustomCheckBox/CustomCheckBox';
-import { SignUp } from '../../types/types';
 
 import style from './registration.module.scss';
 
 interface IRegistration {
-  handleFetch: (user: SignUp) => void;
+  errors: FieldErrors<FieldValues>;
+  register: UseFormRegister<FieldValues>;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-function Registration({ handleFetch }: IRegistration) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    shouldUseNativeValidation: false,
-    mode: 'onBlur',
-  });
-  const onSubmit = async (data: any) => {
-    handleFetch({
-      username: data.username,
-      email: data.email,
-      password: data.password,
-    });
-  };
+function Registration({ errors, register, onSubmit }: IRegistration) {
   return (
     <AuthCard>
       <p className={style.login__title}>Create new account</p>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate onSubmit={onSubmit}>
         <CustomInput
           rule={{
             required: 'required field',

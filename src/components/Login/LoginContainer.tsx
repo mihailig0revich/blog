@@ -1,10 +1,10 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory } from 'react-router';
+import { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import Loader from '../common/Loader/Loader';
 import ErrorComponent from '../common/ErrorComponent/ErrorComponent';
-import { RespType, User, UserLoginType } from '../../types/types';
+import { User, UserLoginType } from '../../types/types';
 import AuthContext from '../../context/context';
 import useAsync from '../../hooks/useAsync/useAsync';
 
@@ -15,18 +15,30 @@ function LoginContainer() {
   const history = useHistory();
   const auth = useContext(AuthContext);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    shouldUseNativeValidation: false,
+    mode: 'onBlur',
+  });
   const { loading, error, value, callback } = useAsync<{ user: User }>({
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
   });
+  const handleFetch = async (user: UserLoginType) => {
+    await callback({ url: '/users/login', body: JSON.stringify({ user }) });
+  };
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
+    console.log(value);
     if (value) {
       if (value.user.token) {
         localStorage.setItem('token', value.user.token);
-        auth.setContextAuth();
+        auth.setContextAuth(value.user.token);
       }
       history.push('');
     }
@@ -35,16 +47,18 @@ function LoginContainer() {
     }
   };
 
-  const handleSubmit = (user: UserLoginType) => callback({ url: '/users/login', body: JSON.stringify({ user }) });
+  const onSubmit = (data: any) => {
+    handleFetch(data);
+  };
 
   useEffect(() => {
     handleLogin();
   }, [error, value]);
 
   if (loading) return <Loader />;
-  if (error?.status) return <ErrorComponent err={error.message} />;
+  if (error?.status) return <ErrorComponent err={`${error.message}`} />;
 
-  return <Login validateError={validateError} handleLogin={handleSubmit} />;
+  return <Login validateError={validateError} errors={errors} onSubmit={handleSubmit(onSubmit)} register={register} />;
 }
 
 export default LoginContainer;

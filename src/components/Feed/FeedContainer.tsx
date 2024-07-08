@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 import Loader from '../common/Loader/Loader';
 import ErrorComponent from '../common/ErrorComponent/ErrorComponent';
@@ -12,7 +11,7 @@ import Feed from './Feed';
 function FeedContainer() {
   const [page, setPage] = useState<number | null>(null);
   const [update, setUpdate] = useState<boolean>(false);
-  const { activePage = '1' } = useParams<{ activePage: string }>();
+  const { activePage = '1' } = useParams();
   const [scroll, setScroll] = useState<number>(0);
   const [articles, setArticles] = useState<PostType[]>([]);
   const ref = useRef(window);
@@ -43,7 +42,7 @@ function FeedContainer() {
   }, [value, error, page]);
 
   if (loading && !update) return <Loader />;
-  if (error) return <ErrorComponent err={error.message} />;
+  if (error) return <ErrorComponent err={`${error.message}`} />;
 
   return <Feed maxPage={page} updateFeed={updateFeed} posts={articles} />;
 }

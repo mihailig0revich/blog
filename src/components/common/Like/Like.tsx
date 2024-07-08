@@ -23,8 +23,6 @@ function Like({ count, like, setLike, deleteLike }: ILike) {
     setIsLike(!like);
   };
 
-  console.log('hello');
-
   return (
     <button type="button" disabled={!auth.username} onClick={likeHandler} className={style.like}>
       <svg width="20" height="16" viewBox="-5 -2 60 55" xmlns="http://www.w3.org/2000/svg">

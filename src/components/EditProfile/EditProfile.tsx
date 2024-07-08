@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 
 import AuthCard from '../common/AuthCard/AuthCard';
 import CustomInput from '../common/CustomInput/CustomInput';

@@ -1,10 +1,9 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
-import ChangePost from '../components/common/ChangePost/ChangePost';
-import useAsync from '../hooks/useAsync/useAsync';
-import { CreatePostType, PostType } from '../types/types';
-import ErrorComponent from '../components/common/ErrorComponent/ErrorComponent';
+import ChangePost from '../common/ChangePost/ChangePost';
+import useAsync from '../../hooks/useAsync/useAsync';
+import { CreatePostType, PostType } from '../../types/types';
+import ErrorComponent from '../common/ErrorComponent/ErrorComponent';
 
 function CreatePost() {
   const history = useHistory();
@@ -21,7 +20,7 @@ function CreatePost() {
   };
 
   if (value) history.push('');
-  if (error) <ErrorComponent err={error.message} />;
+  if (error) <ErrorComponent err={`${error.message}`} />;
 
   return <ChangePost handleCreate={hadleSubmit} loading={loading} name="Create new article" />;
 }

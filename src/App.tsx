@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import style from './App.module.scss';
 import './variable.scss';
-import CreatePost from './CreatePost/CreatePost';
-import EditPost from './EditPost/EditPost';
+import CreatePost from './components/CreatePost/CreatePost';
+import EditPost from './components/EditPost/EditPost';
 import HeaderContainer from './components/Header/HeaderContainer';
 import FeedContainer from './components/Feed/FeedContainer';
 import RegistrationContainer from './components/Registration/RegistrationContainer';
@@ -20,24 +20,27 @@ import useAsync from './hooks/useAsync/useAsync';
 
 function App() {
   const [auth, setAuth] = useState<User>({ username: '' });
-  const token = useRef(localStorage.getItem('token'));
   const { loading, error, value, callback } = useAsync<{ user: User }>({
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${token.current || ''}`,
+      Authorization: `Token ${localStorage.getItem('token') || ''}`,
     },
   });
-  const setContextAuth = async () => {
-    token.current = localStorage.getItem('token');
-    callback({ url: '/user' });
+  const setContextAuth = (newToken: string) => {
+    callback({
+      url: '/user',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${newToken}`,
+      },
+    });
   };
 
   const clearAuth = () => {
     setAuth({ username: '' });
     localStorage.clear();
   };
-  // m.oskolkoff2012@yandex.ru
 
   useEffect(() => {
     if (value) {
@@ -47,7 +50,7 @@ function App() {
   }, [value]);
 
   useEffect(() => {
-    setContextAuth();
+    setContextAuth(localStorage.getItem('token') || '');
   }, []);
 
   const authValue = useMemo(() => {
