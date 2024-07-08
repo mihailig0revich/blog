@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { User } from '../../types/types';
@@ -66,7 +66,8 @@ function RegistrationContainer() {
     submit();
   }, [value, error]);
 
-  if (error?.status) return <ErrorComponent err={`${error.message}`} />;
+  if (!localStorage.getItem('token')) <Redirect to="" />;
+  if (error?.status === 422) return <ErrorComponent />;
   if (loading) <Loader />;
 
   return <Registration register={register} onSubmit={handleSubmit(onSubmit)} errors={errors} />;

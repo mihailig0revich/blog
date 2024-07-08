@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import Loader from '../common/Loader/Loader';
@@ -34,7 +34,6 @@ function LoginContainer() {
   };
 
   const handleLogin = () => {
-    console.log(value);
     if (value) {
       if (value.user.token) {
         localStorage.setItem('token', value.user.token);
@@ -55,8 +54,9 @@ function LoginContainer() {
     handleLogin();
   }, [error, value]);
 
+  if (!localStorage.getItem('token')) <Redirect to="" />;
   if (loading) return <Loader />;
-  if (error?.status) return <ErrorComponent err={`${error.message}`} />;
+  if (error?.status === 422) return <ErrorComponent />;
 
   return <Login validateError={validateError} errors={errors} onSubmit={handleSubmit(onSubmit)} register={register} />;
 }

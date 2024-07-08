@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import AuthCard from '../common/AuthCard/AuthCard';
 import CustomInput from '../common/CustomInput/CustomInput';
 import Button from '../common/Button/Button';
-import { User } from '../../types/types';
+import { User, ValidateErrorTypes } from '../../types/types';
 
 import style from './editProfile.module.scss';
 
@@ -11,12 +11,15 @@ interface IEditProfile {
   handleCreate: (data: User) => void;
   loading: boolean;
   user: User | undefined;
+  validateError: ValidateErrorTypes[];
 }
 
-function EditProfile({ handleCreate, user, loading }: IEditProfile) {
+function EditProfile({ handleCreate, user, loading, validateError }: IEditProfile) {
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<{ [key: string]: any }>({
     shouldUseNativeValidation: false,
@@ -28,7 +31,9 @@ function EditProfile({ handleCreate, user, loading }: IEditProfile) {
       image: user?.image || '',
     },
   });
+  validateError.forEach((err: ValidateErrorTypes) => setError(err[0], err[1]));
   const onSubmit = async (data: any) => {
+    clearErrors();
     handleCreate(data);
   };
   return (
@@ -85,6 +90,7 @@ function EditProfile({ handleCreate, user, loading }: IEditProfile) {
         <Button
           submit
           theme="submit"
+          disabled={loading}
           customStyles={{
             textAlign: 'center',
             height: '40px',

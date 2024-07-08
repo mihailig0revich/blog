@@ -1,10 +1,11 @@
-import { FieldErrors, FieldValues, useForm, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FormEvent } from 'react';
 
 import AuthCard from '../common/AuthCard/AuthCard';
 import CustomInput from '../common/CustomInput/CustomInput';
 import Button from '../common/Button/Button';
+import noAuth from '../../hoc/noAuth';
 
 import style from './login.module.scss';
 
@@ -69,4 +70,4 @@ function Login({ validateError, onSubmit, register, errors }: ILogin) {
   );
 }
 
-export default Login;
+export default noAuth<ILogin>(Login);

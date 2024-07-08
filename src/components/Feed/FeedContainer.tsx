@@ -42,7 +42,7 @@ function FeedContainer() {
   }, [value, error, page]);
 
   if (loading && !update) return <Loader />;
-  if (error) return <ErrorComponent err={`${error.message}`} />;
+  if (error?.status === 422) return <ErrorComponent />;
 
   return <Feed maxPage={page} updateFeed={updateFeed} posts={articles} />;
 }

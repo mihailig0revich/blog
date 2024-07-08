@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FormEvent } from 'react';
 
@@ -6,6 +6,7 @@ import AuthCard from '../common/AuthCard/AuthCard';
 import CustomInput from '../common/CustomInput/CustomInput';
 import Button from '../common/Button/Button';
 import CustomCheckBox from '../common/CustomCheckBox/CustomCheckBox';
+import noAuth from '../../hoc/noAuth';
 
 import style from './registration.module.scss';
 
@@ -118,4 +119,4 @@ function Registration({ errors, register, onSubmit }: IRegistration) {
   );
 }
 
-export default Registration;
+export default noAuth<IRegistration>(Registration);

@@ -58,7 +58,7 @@ function App() {
   }, [auth]);
 
   if (loading) return <Loader />;
-  if (error && error.status !== 401) return <ErrorComponent err="Something went wrong" />;
+  if (error?.status === 422) return <ErrorComponent />;
 
   return (
     <AuthContext.Provider value={authValue}>

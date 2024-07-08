@@ -60,3 +60,5 @@ export interface CreatePostType {
   body: string;
   tags: string[];
 }
+
+export type ValidateErrorTypes = [string, { type: string; message: string }];

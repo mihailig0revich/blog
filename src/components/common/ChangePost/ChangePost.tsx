@@ -3,7 +3,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import PostCard from '../PostCard/PostCard';
 import Button from '../Button/Button';
 import CustomInput from '../CustomInput/CustomInput';
-import { CreatePostType, PostType } from '../../../types/types';
+import { CreatePostType, PostType, ValidateErrorTypes } from '../../../types/types';
 
 import style from './changePost.module.scss';
 
@@ -22,13 +22,15 @@ interface ICreatePost {
   name: string;
   handleCreate: (i: CreatePostType) => void;
   loading: boolean | undefined;
+  validateError: ValidateErrorTypes[];
 }
 
-function ChangePost({ name, post, handleCreate, loading }: ICreatePost) {
-  console.log(post);
+function ChangePost({ name, post, handleCreate, loading, validateError }: ICreatePost) {
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     control,
     formState: { errors },
   } = useForm<{ [key: string]: any }>({
@@ -50,7 +52,9 @@ function ChangePost({ name, post, handleCreate, loading }: ICreatePost) {
     name: 'tags',
     control,
   });
+  validateError.forEach((err: ValidateErrorTypes) => setError(err[0], err[1]));
   const onSubmit = async (data: any) => {
+    clearErrors();
     handleCreate({ ...data, tagList: data.tags.map((val: { value: string }) => val.value) });
   };
   return (
@@ -115,7 +119,6 @@ function ChangePost({ name, post, handleCreate, loading }: ICreatePost) {
                 <Button
                   theme="danger"
                   handler={() => remove(index)}
-                  submit={!!loading}
                   customStyles={{
                     textAlign: 'center',
                     height: '40px',
@@ -153,6 +156,7 @@ function ChangePost({ name, post, handleCreate, loading }: ICreatePost) {
         <Button
           submit
           theme="submit"
+          disabled={!!loading}
           customStyles={{
             textAlign: 'center',
             height: '40px',

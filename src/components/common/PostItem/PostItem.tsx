@@ -16,7 +16,7 @@ function PostItem({ post, updateFeed }: IPost) {
   return (
     <PostCard>
       <PostHeader post={post} updateFeed={updateFeed} />
-      <Markdown className={style.post__text}>{post.description}</Markdown>
+      <p className={style.post__text}>{post.description}</p>
     </PostCard>
   );
 }
