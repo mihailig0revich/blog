@@ -1,4 +1,4 @@
-
+@import "../../../variable.scss";
 .button {
   font-family: 'Inter UI';
   display: flex;
@@ -7,7 +7,7 @@
   background: none;
   outline: none;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 1px solid $themeBlack;
   transition: background-color 0.2s;
   cursor: pointer;
   &:hover {

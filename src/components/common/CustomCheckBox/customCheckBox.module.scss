@@ -1,3 +1,5 @@
+@import "../../../variable.scss";
+
 .container {
   display: flex;
   justify-content: left;
@@ -20,16 +22,16 @@
   height: 18px;
   width: 18px;
   border-radius: 2px;
-  border: 1px solid #9ABBCE;
+  border: 1px solid $themeBlueGray;
   margin-right: 10px;
 
   &_error {
-    border-color: #F5222D;
+    border-color: $themeRed;
   }
 }
 
 .text {
-  color: black;
+  color: $themeBlack;
   font-family: "Roboto";
   font-size: 14px;
   font-weight: 400;
@@ -40,11 +42,11 @@
 }
 
 .container:hover input ~ .checkmark {
-  background-color: #dfdfdf;
+  background-color: $themeMiddleGray;
 }
 
 .container input:checked ~ .checkmark {
-  background-color: #1890FF;
+  background-color: $themeBlue;
 }
 
 .checkmark:after {
@@ -62,14 +64,14 @@
   top: 6px;
   width: 4px;
   height: 8px;
-  border: solid white;
+  border: solid $themeWhite;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
 
 .wrapper {
   &__error {
-    color: #F5222D;
+    color: $themeRed;
     font-family: "Roboto";
     font-size: 14px;
     font-weight: 400;

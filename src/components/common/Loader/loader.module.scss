@@ -1,3 +1,5 @@
+@import "../../../variable.scss";
+
 .loader {
   width: 25px;
   height: 25px;
@@ -5,23 +7,23 @@
   display: block;
   margin: 40px auto;
   position: relative;
-  background: #EBEEF3;
-  box-shadow: -35px 0 #EBEEF3, 35px 0 #EBEEF3;
+  background: $themeLightBlue;
+  box-shadow: -35px 0 $themeLightBlue, 35px 0 $themeLightBlue;
   box-sizing: border-box;
   animation: shadowPulse 2s linear infinite;
 }
 
 @keyframes shadowPulse {
   33% {
-    background: #EBEEF3;
-    box-shadow: -35px 0 #1890FF, 35px 0 #EBEEF3;
+    background: $themeLightBlue;
+    box-shadow: -35px 0 $themeBlue, 35px 0 $themeLightBlue;
   }
   66% {
-    background: #1890FF;
-    box-shadow: -35px 0 #EBEEF3, 35px 0 #EBEEF3;
+    background: $themeBlue;
+    box-shadow: -35px 0 $themeLightBlue, 35px 0 $themeLightBlue;
   }
   100% {
-    background: #EBEEF3;
-    box-shadow: -35px 0 #EBEEF3, 35px 0 #1890FF;
+    background: $themeLightBlue;
+    box-shadow: -35px 0 $themeLightBlue, 35px 0 $themeBlue;
   }
 }

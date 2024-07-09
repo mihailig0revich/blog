@@ -1,6 +1,8 @@
+@import "../../../variable.scss";
+
 .tag {
   border-radius: 2px;
-  border: 1px solid #000000;
+  border: 1px solid $themeBlack;
   padding: 2px 6px 3px 5px;
   font-family: "Inter UI";
   font-size: 12px;

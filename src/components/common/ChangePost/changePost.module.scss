@@ -1,3 +1,5 @@
+@import "../../../variable.scss";
+
 .newArticle {
   &__title {
     font-family: "Roboto";
@@ -5,7 +7,7 @@
     font-weight: 700;
     line-height: 28px;
     text-align: center;
-    color: #262626;
+    color: $themeBlack;
     margin: 0 0 21px 0;
   }
 }

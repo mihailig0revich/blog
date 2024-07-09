@@ -13,6 +13,7 @@ function HeaderContainer() {
   };
   const logOutHandler = () => {
     auth.clearAuth();
+    window.location.reload();
   };
   const toRegister = () => {
     history.replace('/sign-up');

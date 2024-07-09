@@ -1,3 +1,5 @@
+@import "../../../variable.scss";
+
 .pagination {
   font-family: Inter UI;
   font-size: 12px;
@@ -26,11 +28,11 @@
     }
 
     &_active {
-      background: #1890FF;
-      color: white;
+      background: $themeBlue;
+      color: $themeWhite;
       transition: none;
       &:hover {
-        background-color: #1890FF;
+        background-color: $themeBlue;
       }
     }
   }
