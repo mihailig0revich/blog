@@ -21,7 +21,7 @@ function EditProfile({ handleCreate, user, loading, validateError }: IEditProfil
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm<{ [key: string]: any }>({
+  } = useForm<any>({
     shouldUseNativeValidation: false,
     mode: 'onBlur',
     defaultValues: {
@@ -32,7 +32,7 @@ function EditProfile({ handleCreate, user, loading, validateError }: IEditProfil
     },
   });
   validateError.forEach((err: ValidateErrorTypes) => setError(err[0], err[1]));
-  const onSubmit = async (data: any) => {
+  const onSubmit = (data: any) => {
     clearErrors();
     handleCreate(data);
   };

@@ -5,6 +5,7 @@ import Loader from '../common/Loader/Loader';
 import ErrorComponent from '../common/ErrorComponent/ErrorComponent';
 import { PostType } from '../../types/types';
 import useAsync from '../../hooks/useAsync/useAsync';
+import { calculatePage } from '../../utils/utils';
 
 import Feed from './Feed';
 
@@ -35,8 +36,7 @@ function FeedContainer() {
   }, [activePage]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-unsafe-optional-chaining
-    if (value) setPage(Math.ceil(+value?.articlesCount / 10));
+    if (value) setPage(calculatePage(+value.articlesCount, 10));
     if (value) setArticles(value.articles);
     ref.current.scroll(0, scroll);
   }, [value, error, page]);

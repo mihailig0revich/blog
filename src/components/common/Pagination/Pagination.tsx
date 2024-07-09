@@ -1,5 +1,3 @@
-import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useHistory, useParams } from 'react-router-dom';
 
 import style from './pagination.module.scss';
@@ -54,7 +52,7 @@ function Pagination({ maxPage }: IPagination) {
           <path
             d="M6.49701 10.4959C6.36446 10.4959 6.23053 10.4521 6.1187 10.3646L0.267188 5.70389C0.124973 5.59042 0.0421295 5.41952 0.0421295 5.23768C0.0421295 5.05721 0.124973 4.88495 0.267188 4.77284L6.09384 0.136706C6.35342 -0.0697388 6.73312 -0.0287232 6.94161 0.228308C7.1501 0.485339 7.10867 0.861316 6.8491 1.06776L1.60787 5.23768L6.87533 9.43358C7.13491 9.64003 7.17633 10.016 6.96784 10.273C6.84772 10.4193 6.67375 10.4959 6.49701 10.4959Z"
             fill="black"
-            fillOpacity={activeNum === 1 ? '0.35' : '0.75'}
+            fillOpacity={activeNum === maxPage ? '0.35' : '0.75'}
           />
         </svg>
       </button>

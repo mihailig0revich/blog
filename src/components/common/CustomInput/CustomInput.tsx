@@ -1,5 +1,4 @@
 import { FieldErrors, FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form';
-// eslint-disable-next-line import/no-unresolved
 import { CSSProperties } from 'react';
 
 import style from './customInput.module.scss';

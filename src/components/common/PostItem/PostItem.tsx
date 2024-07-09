@@ -1,6 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import Markdown from 'react-markdown';
-
 import PostHeader from '../PostHeader/PostHeader';
 import PostCard from '../PostCard/PostCard';
 import { PostType } from '../../../types/types';

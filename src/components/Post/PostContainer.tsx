@@ -26,7 +26,6 @@ function PostContainer() {
   const {
     error: errorDelete,
     loading: loadingDelete,
-    value: valueDelete,
     callback: callbackDelete,
   } = useAsync<{ article: PostType; articlesCount: number }>({
     headers: {
@@ -61,7 +60,6 @@ function PostContainer() {
   if (error || errorDelete?.message) return <ErrorComponent err={`${error?.message || errorDelete?.message}`} />;
   if ((loading && !update) || defVal === undefined) return <Loader />;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   return (
     <Post
       load={!!loadingDelete}
