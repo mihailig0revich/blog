@@ -55,7 +55,14 @@ function ChangePost({ name, post, handleCreate, loading, validateError }: ICreat
   validateError.forEach((err: ValidateErrorTypes) => setError(err[0], err[1]));
   const onSubmit = async (data: any) => {
     clearErrors();
-    handleCreate({ ...data, tagList: data.tags.map((val: { value: string }) => val.value) });
+    handleCreate({
+      ...data,
+      tagList: data.tags
+        .filter((tag: { value: string }) => {
+          return !!tag.value.replace(/\s+/g, '');
+        })
+        .map((val: { value: string }) => val.value.replace(/\s+/g, '')),
+    });
   };
   return (
     <PostCard customStyles={{ padding: '48px 32px' }}>
@@ -86,27 +93,35 @@ function ChangePost({ name, post, handleCreate, loading, validateError }: ICreat
           styles={{ marginBottom: '21px', paddingBottom: 0 }}
         />
         <CustomInput
-          rule={{ minLength: { message: 'меньше буков плизззз', value: 3 } }}
+          rule={{ required: 'required field' }}
           error={errors}
           name="body"
           type="textarea"
           register={register}
           label="Text"
           rows={5}
+          wrapperStyles={{ marginBottom: '21px' }}
           defaultValue={post?.body}
-          styles={{ marginBottom: '21px', paddingBottom: '21px', height: '170px', resize: 'none' }}
+          styles={{ paddingBottom: '21px', height: '170px', resize: 'none' }}
         />
         <div className={style.tag}>
           <ul className={style.tag__list}>
             {fields.map((tag, index) => (
               <li key={tag.id} className={style.tag__item}>
                 <CustomInput
-                  rule={{ minLength: { message: 'меньше буков плизззз', value: 3 } }}
                   error={errors}
                   name={`tags.${index}.value`}
                   type="text"
                   register={register}
-                  rows={5}
+                  rule={{
+                    required: 'required field',
+                    validate: (value: string) => {
+                      if (value.split(' ').length === 1) {
+                        return true;
+                      }
+                      return 'Tag can contain only one word';
+                    },
+                  }}
                   defaultValue={tag.id}
                   styles={{
                     paddingBottom: 0,

@@ -1,6 +1,9 @@
 import { FieldErrors, FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form';
 import { CSSProperties } from 'react';
 
+import { getErrorMessage } from '../../../utils/utils';
+import ErrorComponent from '../ErrorComponent/ErrorComponent';
+
 import style from './customInput.module.scss';
 
 interface ICustomInput {
@@ -14,22 +17,31 @@ interface ICustomInput {
   placeholder?: string;
   rows?: number;
   defaultValue?: string;
+  wrapperStyles?: CSSProperties;
 }
 
-function CustomInput({ register, name, error, rule, label, styles, type, rows, ...rest }: ICustomInput) {
-  const hasError = error && error[name];
+function CustomInput({ register, name, error, rule, label, styles, type, rows, wrapperStyles, ...rest }: ICustomInput) {
+  let textError: string | false = getErrorMessage(error, name);
+  try {
+    if (error) {
+      textError = getErrorMessage(error, name);
+    }
+  } catch {
+    return <ErrorComponent err="We apologize, we are already trying to fix the problem, check back later." />;
+  }
   if (type === 'textarea') {
+    console.log(textError);
     return (
-      <div className={style.customInput} style={styles}>
+      <div className={style.customInput} style={wrapperStyles}>
         <p className={style.customInput__label}>{label}</p>
         <textarea
-          className={`${style.customInput__input} ${hasError && style.customInput__input_error}`}
+          className={`${style.customInput__input} ${textError && style.customInput__input_error}`}
           rows={rows}
           style={{ ...styles }}
           {...register(name, rule)}
           {...rest}
         />
-        {hasError && <p className={style.customInput__error}>{error[name]?.message?.toString()}</p>}
+        {textError && <p className={style.customInput__error}>{textError}</p>}
       </div>
     );
   }
@@ -38,11 +50,11 @@ function CustomInput({ register, name, error, rule, label, styles, type, rows, .
       <p className={style.customInput__label}>{label}</p>
       <input
         type={type}
-        className={`${style.customInput__input} ${hasError && style.customInput__input_error}`}
+        className={`${style.customInput__input} ${textError && style.customInput__input_error}`}
         {...register(name, rule)}
         {...rest}
       />
-      {hasError && <p className={style.customInput__error}>{error[name]?.message?.toString()}</p>}
+      {textError && <p className={style.customInput__error}>{textError}</p>}
     </div>
   );
 }

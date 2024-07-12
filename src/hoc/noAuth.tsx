@@ -7,7 +7,9 @@ function noAuth<T extends object>(Component: React.ComponentType<T>) {
   function WrappedComponent(props: T) {
     const auth = useContext(AuthContext);
 
-    if (auth.auth.username) return <Redirect to="" />;
+    if (localStorage.getItem('token')) {
+      return <Redirect to="" />;
+    }
 
     return <Component {...props} />;
   }
